@@ -6,10 +6,14 @@ const output = document.getElementById("demo");
 const current = output.innerHTML = val; // Display the default slider value
 const password = document.getElementById('password');
 
-const string = "abcdefghijklmnopqrstuvwxyz`~1234567890!@#$%^&*()_+=-|";
+const lowercase = "abcdefghijklmnopqrstuvwxyz";
+const uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+const num = "1234567890";
+const spec = "`~!@#$%^&*()_+=-|"
 
-
-
+var numBox = document.getElementById("num");
+var symBox = document.getElementById("sym");
+var uppBox = document.getElementById("upp");
 
 // Update the current slider value (each time you drag the slider handle)
 slider.oninput = function() {
@@ -33,8 +37,11 @@ function wPassword(l, characters){
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", function(){
-  password.innerHTML = "";
+  var characters = lowercase;
+  (numBox.checked) ? characters += num : '';
+  (symBox.checked) ? characters += spec : '';
+  (uppBox.checked) ? characters += uppercase : '';
   console.log('hi')
-  console.log(wPassword(slider.value, string))
-  wPassword(slider.value, string)
+  console.log(wPassword(slider.value, characters))
+  wPassword(slider.value, characters)
 });
